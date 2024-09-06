@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDataContext } from '../context/UserData';
+import { useLoginContext } from '../context/LoginContext';
 
 const Navbar = () => {
   const { user } = useDataContext();
+  const { handleLogout } = useLoginContext();
 
   return (
     <Wrapper className='section'>
@@ -22,7 +24,7 @@ const Navbar = () => {
             )}
           </div>
           <div className='links'>
-            <button>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
           </div>
         </div>
       </div>

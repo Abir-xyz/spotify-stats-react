@@ -3,8 +3,15 @@ import styled from 'styled-components';
 import { TbMicrophone2 } from 'react-icons/tb';
 import { PiPlaylistDuotone } from 'react-icons/pi';
 import { FaHistory } from 'react-icons/fa';
+import { useLoginContext } from '../context/LoginContext';
 
 const Footer = () => {
+  const { accessToken } = useLoginContext();
+
+  if (!accessToken) {
+    return false;
+  }
+
   return (
     <Wrapper className='section'>
       <div className='container'>

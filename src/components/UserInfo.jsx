@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import userImg from '../assets/user.jpg';
 import { useDataContext } from '../context/UserData';
 
 const UserInfo = () => {
