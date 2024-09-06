@@ -99,8 +99,10 @@ const Wrapper = styled.section`
     height: 50px;
     border-radius: 2px;
     margin-right: 20px;
-    opacity: 0.6;
+    opacity: 0.8;
+    cursor: pointer;
   }
+
   .track-artist {
     padding-right: 5px;
   }
@@ -139,6 +141,13 @@ const Wrapper = styled.section`
     left: 0;
     bottom: 25%;
     margin-left: 15px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.1s ease-in;
+  }
+  .play-pause-btn:hover {
+    scale: calc(1.2);
+    opacity: 1;
   }
 `;
 
