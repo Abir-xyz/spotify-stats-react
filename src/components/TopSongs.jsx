@@ -84,6 +84,7 @@ const Wrapper = styled.section`
   .container {
     max-width: 80vw;
     margin: 0 auto;
+    margin-bottom: 5rem !important;
   }
   .heading {
     display: flex;
