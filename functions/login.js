@@ -8,7 +8,7 @@ exports.handler = async function (event, context) {
 
   // const scopes = encodeURIComponent('user-read-private user-read-email');
   const scopes = encodeURIComponent(
-    'user-read-private user-read-email user-follow-read playlist-read-private'
+    'user-read-private user-read-email user-follow-read playlist-read-private user-top-read'
   );
 
   const authUrl =
