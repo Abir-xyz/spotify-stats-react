@@ -10,6 +10,7 @@ export const UserProvider = ({ children }) => {
   const [playList, setPlayList] = useState('');
   const [following, setFollowing] = useState('');
   const [topArtist, setTopArtist] = useState('');
+  const [topTrack, setTopTracks] = useState('');
 
   const getUser = async () => {
     try {
@@ -74,11 +75,26 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const getTopTrack = async () => {
+    try {
+      const response = await axios(`${rootURL}/top/tracks`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.data;
+      setTopTracks(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUser();
     getPlayList();
     getFollowing();
     getTopArtist();
+    getTopTrack();
   }, []);
 
   return (
@@ -88,6 +104,7 @@ export const UserProvider = ({ children }) => {
         playList,
         following,
         topArtist,
+        topTrack,
       }}
     >
       {children}
