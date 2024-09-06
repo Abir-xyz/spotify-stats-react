@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import Login from './Login';
-import { Navbar, UserInfo, TopArtist, TopSongs, Footer } from '../components';
+import { Navbar, UserInfo, TopArtist, TopSongs } from '../components';
 
 const accessToken = localStorage.getItem('spotify_access_token');
 
@@ -20,7 +20,6 @@ const Dashboard = () => {
           <UserInfo />
           <TopArtist />
           <TopSongs />
-          <Footer />
         </div>
       ) : (
         <div>
