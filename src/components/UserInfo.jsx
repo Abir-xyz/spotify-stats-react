@@ -4,7 +4,6 @@ import { useDataContext } from '../context/UserData';
 
 const UserInfo = () => {
   const { user, playList, following } = useDataContext();
-  console.log(following);
 
   return (
     <Wrapper className='section'>
@@ -22,13 +21,13 @@ const UserInfo = () => {
                 <div className='section'>Followers</div>
               </div>
               <div>
-                <div className='counts'>100</div>
+                <div className='counts'>
+                  {following && following.artists.total}
+                </div>
                 <div className='section'>Following</div>
               </div>
               <div>
-                <div className='counts'>
-                  {playList && <p>{playList.items.length}</p>}
-                </div>
+                <div className='counts'>{playList && playList.length}</div>
                 <div className='section'>Playlists</div>
               </div>
             </div>

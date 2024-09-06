@@ -22,3 +22,18 @@ body {
   --btnPadding: 8px 20px;
   --btnTransition: all 0.2s ease-in-out;
 }
+
+.more-btn {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: var(--darkTxt);
+  border: 1px solid var(--darkTxt);
+  padding: 4px 10px;
+  border-radius: 10rem;
+  transition: var(--btnTransition);
+}
+
+.more-btn:hover {
+  background-color: var(--darkTxt);
+  color: #000;
+}

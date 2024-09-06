@@ -1,14 +1,25 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useDataContext } from '../context/UserData';
 
 const Navbar = () => {
+  const { user } = useDataContext();
+
   return (
     <Wrapper className='section'>
       <div className='container'>
         <div className='center'>
           <div className='brand'>
-            <p>
-              Hi, <span>Abir</span>
-            </p>
+            {user && (
+              <p>
+                Hi,{' '}
+                <span>
+                  <Link to='/' className='link'>
+                    {user.display_name}
+                  </Link>
+                </span>
+              </p>
+            )}
           </div>
           <div className='links'>
             <button>Logout</button>
@@ -25,8 +36,11 @@ const Wrapper = styled.section`
     p {
       font-size: 1.8rem;
       span {
-        color: var(--themeClr);
         font-weight: 700;
+        .link {
+          text-decoration: none;
+          color: var(--themeClr);
+        }
       }
     }
     button {

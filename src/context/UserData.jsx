@@ -25,14 +25,21 @@ export const UserProvider = ({ children }) => {
   };
 
   const getPlayList = async () => {
+    let allPlaylists = [];
+    let url = `${rootURL}/playlists`;
+
     try {
-      const response = await axios(`${rootURL}/playlists`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.data;
-      setPlayList(data);
+      while (url) {
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = response.data;
+        allPlaylists = allPlaylists.concat(data.items);
+        url = data.next;
+      }
+      setPlayList(allPlaylists);
     } catch (error) {
       console.log(error);
     }
@@ -40,12 +47,12 @@ export const UserProvider = ({ children }) => {
 
   const getFollowing = async () => {
     try {
-      const response = await axios(`${rootURL}/following`, {
+      const response = await axios(`${rootURL}/following?type=artist`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = await response.data;
+      const data = response.data;
       setFollowing(data);
     } catch (error) {
       console.log(error);
@@ -55,7 +62,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     getUser();
     getPlayList();
-    setFollowing();
+    getFollowing();
   }, []);
 
   return (
@@ -63,6 +70,7 @@ export const UserProvider = ({ children }) => {
       value={{
         user,
         playList,
+        following,
       }}
     >
       {children}
