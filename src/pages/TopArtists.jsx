@@ -55,22 +55,41 @@ const TopArtists = () => {
         <div className='content'>
           {termValue ? (
             <div className='content-wrapper'>
-              {termValue.map((item) => {
-                return (
-                  <div className='main' key={item.id}>
-                    <img
-                      src={item.images[0].url}
-                      alt='image'
-                      className='item-img'
-                    />
-                    <p className='title'>{item.name}</p>
-                  </div>
-                );
-              })}
+              {termValue &&
+                termValue.map((item) => {
+                  return (
+                    <div className='main' key={item.id}>
+                      <img
+                        src={item.images[0].url}
+                        alt='image'
+                        className='item-img'
+                      />
+                      <p className='title'>{item.name}</p>
+                    </div>
+                  );
+                })}
             </div>
           ) : (
-            <div className='load'>
-              <p>Loading...</p>
+            <div className='content-wrapper'>
+              {yearly ? (
+                yearly.map((item) => {
+                  return (
+                    <div className='main' key={item.id}>
+                      <img
+                        src={item.images[0].url}
+                        alt='image'
+                        className='item-img'
+                      />
+                      <p className='title'>{item.name}</p>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className='load'>
+                  {/* <p></p> */}
+                  Loading...
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -132,12 +151,11 @@ const Wrapper = styled.section`
     flex-direction: column;
   }
   .load {
-    text-align: center;
+    height: 60vh;
+    width: 90vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60vh;
-    font-size: 1.1rem;
   }
 
   .content {
