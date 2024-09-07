@@ -26,7 +26,7 @@ const TopSongs = () => {
       <div className='container'>
         <div className='heading'>
           <p>Top Tracks Of All time</p>
-          <Link to='#' className='more-btn'>
+          <Link to='/top-tracks' className='more-btn'>
             See More
           </Link>
         </div>

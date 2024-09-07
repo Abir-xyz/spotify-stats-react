@@ -11,6 +11,10 @@ export const UserProvider = ({ children }) => {
   const [following, setFollowing] = useState('');
   const [topArtist, setTopArtist] = useState('');
   const [topTrack, setTopTracks] = useState('');
+  const [topArtistYear, setTopArtistYear] = useState('');
+  const [topArtistFourWeek, setTopArtistSix] = useState('');
+  const [topTrackYear, setTopTrackYear] = useState('');
+  const [topTrackFourWeek, setTopTrackSix] = useState('');
 
   const getUser = async () => {
     try {
@@ -63,13 +67,33 @@ export const UserProvider = ({ children }) => {
 
   const getTopArtist = async () => {
     try {
-      const response = await axios(`${rootURL}/top/artists`, {
+      const response = await axios(`${rootURL}/top/artists?limit=50`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      const byYear = await axios(
+        `${rootURL}/top/artists?limit=50&time_range=long_term`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const byFourWeek = await axios(
+        `${rootURL}/top/artists?limit=50&time_range=short_term`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.data;
+      const yearData = await byYear.data;
+      const FourWeek = await byFourWeek.data;
       setTopArtist(data);
+      setTopArtistYear(yearData);
+      setTopArtistSix(FourWeek);
     } catch (error) {
       console.log(error);
     }
@@ -82,8 +106,25 @@ export const UserProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      const byYear = await axios(`${rootURL}/top/tracks?time_range=long_term`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const byFourWeek = await axios(
+        `${rootURL}/top/tracks?time_range=short_term`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.data;
+      const yearData = await byYear.data;
+      const FourWeek = await byFourWeek.data;
       setTopTracks(data);
+      setTopTrackYear(yearData);
+      setTopTrackSix(FourWeek);
     } catch (error) {
       console.log(error);
     }
@@ -105,6 +146,10 @@ export const UserProvider = ({ children }) => {
         following,
         topArtist,
         topTrack,
+        topArtistYear,
+        topArtistFourWeek,
+        topTrackFourWeek,
+        topTrackYear,
       }}
     >
       {children}

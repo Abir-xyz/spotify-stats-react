@@ -13,7 +13,7 @@ const TopArtist = () => {
       <div className='container'>
         <div className='heading'>
           <p>Top Artists Of All time</p>
-          <Link to='#' className='more-btn'>
+          <Link to='/top-artists' className='more-btn'>
             See More
           </Link>
         </div>
