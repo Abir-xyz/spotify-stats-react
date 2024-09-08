@@ -1,4 +1,218 @@
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useDataContext } from '../context/UserData';
+
 const TopTracks = () => {
-  return <div>TopTracks</div>;
+  const { topTrackYear, topTrack, topTrackFourWeek } = useDataContext();
+  const yearly = topTrackYear && topTrackYear.items;
+
+  const [termValue, setTermValue] = useState(yearly);
+
+  const sixMonth = topTrack && topTrack.items;
+  const FourWeek = topTrackFourWeek && topTrackFourWeek.items;
+
+  console.log(yearly);
+
+  const handleActiveBtn = () => {
+    const btns = document.querySelectorAll('.btn');
+    btns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        btns.forEach((b) => b.classList.remove('active'));
+        e.target.classList.add('active');
+      });
+    });
+  };
+
+  const handleYearFetch = () => {
+    setTermValue(yearly);
+  };
+  const handleSixMonthFetch = () => {
+    setTermValue(sixMonth);
+  };
+  const handleFourWeekFetch = () => {
+    setTermValue(FourWeek);
+  };
+
+  useEffect(() => {
+    handleActiveBtn();
+  }, []);
+
+  return (
+    <Wrapper className='section'>
+      <div className='container'>
+        <div className='heading'>
+          <p>Top Tracks</p>
+          <div className='btn-wrapper'>
+            <button className='btn active' onClick={handleYearFetch}>
+              All Time
+            </button>
+            <button className='btn' onClick={handleSixMonthFetch}>
+              Last 6 Months
+            </button>
+            <button className='btn' onClick={handleFourWeekFetch}>
+              Last 4 Weeks
+            </button>
+          </div>
+        </div>
+        <div className='content'>
+          {termValue ? (
+            <div className='content-wrapper'>
+              {termValue &&
+                termValue.map((item) => {
+                  const artists = item.album.artists;
+                  return (
+                    <div className='main' key={item.id}>
+                      <div className='main-wrap'>
+                        <div className='img-wrapper'>
+                          <img src={item.album.images[0].url} alt='image' />
+                        </div>
+                        <div className='info-wrapper'>
+                          <p className='track-title'>{item.name}</p>
+                          <p className='track-info'>
+                            <span className='artist-names'>
+                              {artists.map((i) => i.name).join(' , ')}
+                            </span>
+                            <span className='divider'>|</span>
+                            <span className='album-name'>
+                              {item.album.name}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          ) : (
+            <div className='content-wrapper'>
+              {yearly ? (
+                yearly.map((item) => {
+                  const artists = item.album.artists;
+                  return (
+                    <div className='main' key={item.id}>
+                      <div className='main-wrap'>
+                        <div className='img-wrapper'>
+                          <img src={item.album.images[0].url} alt='image' />
+                        </div>
+                        <div className='info-wrapper'>
+                          <p className='track-title'>{item.name}</p>
+                          <p className='track-info'>
+                            <span className='artist-names'>
+                              {artists.map((i) => i.name)}
+                            </span>
+                            <span className='divider'>|</span>
+                            <span className='album-name'>
+                              {item.album.name}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className='load'>
+                  {/* <p></p> */}
+                  Loading...
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+      ;
+    </Wrapper>
+  );
 };
+
+const Wrapper = styled.section`
+  .container {
+    max-width: 90vw;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+  .heading {
+    text-align: center;
+    margin: 3rem 0;
+    p {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+  .btn-wrapper {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .btn {
+    font-size: 1rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    outline: none;
+    color: #cacaca;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-decoration: none;
+  }
+  .active {
+    color: var(--darkTxt);
+    text-decoration: underline;
+  }
+  .img-wrapper img {
+    height: 70px;
+    width: 70;
+    margin-bottom: 10px;
+  }
+  .info-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    margin-left: 20px;
+    color: var(--greyTxt);
+    font-size: 0.8rem;
+  }
+  .divider {
+    margin: 0 8px;
+  }
+  .track-title {
+    font-size: 1rem;
+    color: var(--darkTxt);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    white-space: nowrap;
+  }
+  .main-wrap {
+    margin: 26px 0;
+    display: flex;
+    align-items: center;
+  }
+  .load {
+    height: 60vh;
+    width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content {
+    margin-bottom: 5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    /* .content-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+    .main {
+      grid-column: span 1;
+    } */
+  }
+`;
+
 export default TopTracks;

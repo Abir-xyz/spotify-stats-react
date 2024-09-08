@@ -67,7 +67,7 @@ const TopSongs = () => {
                       <span className='track-artist'>
                         {item.artists[0].name}
                       </span>{' '}
-                      ~ {''}
+                      | {''}
                       <span className='track-album'>{item.album.name}</span>
                     </p>
                   </div>

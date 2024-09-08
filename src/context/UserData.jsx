@@ -101,18 +101,21 @@ export const UserProvider = ({ children }) => {
 
   const getTopTrack = async () => {
     try {
-      const response = await axios(`${rootURL}/top/tracks`, {
+      const response = await axios(`${rootURL}/top/tracks?limit=50`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      const byYear = await axios(`${rootURL}/top/tracks?time_range=long_term`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const byYear = await axios(
+        `${rootURL}/top/tracks?limit=50&time_range=long_term`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const byFourWeek = await axios(
-        `${rootURL}/top/tracks?time_range=short_term`,
+        `${rootURL}/top/tracks?limit=50&time_range=short_term`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
