@@ -60,22 +60,33 @@ const TopTracks = () => {
               {termValue &&
                 termValue.map((item) => {
                   const artists = item.album.artists;
+                  const durationInMin = Math.floor(item.duration_ms / 60000);
+                  const remainingSec = Math.floor(
+                    (item.duration_ms % 60000) / 1000
+                  );
                   return (
                     <div className='main' key={item.id}>
                       <div className='main-wrap'>
-                        <div className='img-wrapper'>
-                          <img src={item.album.images[0].url} alt='image' />
+                        <div className='inner-main'>
+                          <div className='img-wrapper'>
+                            <img src={item.album.images[0].url} alt='image' />
+                          </div>
+                          <div className='info-wrapper'>
+                            <p className='track-title'>{item.name}</p>
+                            <p className='track-info'>
+                              <span className='artist-names'>
+                                {artists.map((i) => i.name).join(' , ')}
+                              </span>
+                              <span className='divider'>|</span>
+                              <span className='album-name'>
+                                {item.album.name}
+                              </span>
+                            </p>
+                          </div>
                         </div>
-                        <div className='info-wrapper'>
-                          <p className='track-title'>{item.name}</p>
-                          <p className='track-info'>
-                            <span className='artist-names'>
-                              {artists.map((i) => i.name).join(' , ')}
-                            </span>
-                            <span className='divider'>|</span>
-                            <span className='album-name'>
-                              {item.album.name}
-                            </span>
+                        <div className='duration'>
+                          <p>
+                            {durationInMin}:{remainingSec}
                           </p>
                         </div>
                       </div>
@@ -88,22 +99,33 @@ const TopTracks = () => {
               {yearly ? (
                 yearly.map((item) => {
                   const artists = item.album.artists;
+                  const durationInMin = Math.floor(item.duration_ms / 60000);
+                  const remainingSec = Math.floor(
+                    (item.duration_ms % 60000) / 1000
+                  );
                   return (
                     <div className='main' key={item.id}>
                       <div className='main-wrap'>
-                        <div className='img-wrapper'>
-                          <img src={item.album.images[0].url} alt='image' />
+                        <div className='inner-main'>
+                          <div className='img-wrapper'>
+                            <img src={item.album.images[0].url} alt='image' />
+                          </div>
+                          <div className='info-wrapper'>
+                            <p className='track-title'>{item.name}</p>
+                            <p className='track-info'>
+                              <span className='artist-names'>
+                                {artists.map((i) => i.name).join(' , ')}
+                              </span>
+                              <span className='divider'>|</span>
+                              <span className='album-name'>
+                                {item.album.name}
+                              </span>
+                            </p>
+                          </div>
                         </div>
-                        <div className='info-wrapper'>
-                          <p className='track-title'>{item.name}</p>
-                          <p className='track-info'>
-                            <span className='artist-names'>
-                              {artists.map((i) => i.name)}
-                            </span>
-                            <span className='divider'>|</span>
-                            <span className='album-name'>
-                              {item.album.name}
-                            </span>
+                        <div className='duration'>
+                          <p>
+                            {durationInMin}:{remainingSec}
                           </p>
                         </div>
                       </div>
@@ -185,10 +207,15 @@ const Wrapper = styled.section`
     max-width: 300px;
     white-space: nowrap;
   }
-  .main-wrap {
-    margin: 26px 0;
+  .inner-main {
+    margin: 10px 0;
     display: flex;
     align-items: center;
+  }
+  .main-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .load {
     height: 60vh;
@@ -196,6 +223,11 @@ const Wrapper = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .duration p {
+    color: var(--greyTxt);
+    font-size: 0.8rem;
   }
 
   .content {
