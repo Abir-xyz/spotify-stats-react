@@ -86,7 +86,8 @@ const TopTracks = () => {
                         </div>
                         <div className='duration'>
                           <p>
-                            {durationInMin}:{remainingSec}
+                            {durationInMin}:
+                            {remainingSec.toString().padStart(2, '0')}
                           </p>
                         </div>
                       </div>
@@ -125,7 +126,8 @@ const TopTracks = () => {
                         </div>
                         <div className='duration'>
                           <p>
-                            {durationInMin}:{remainingSec}
+                            {durationInMin}:
+                            {remainingSec.toString().padStart(2, '0')}
                           </p>
                         </div>
                       </div>
