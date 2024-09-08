@@ -41,7 +41,7 @@ export const UserProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        const data = response.data;
+        const data = await response.data;
         allPlaylists = allPlaylists.concat(data.items);
         url = data.next;
       }
@@ -58,7 +58,7 @@ export const UserProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = response.data;
+      const data = await response.data;
       setFollowing(data);
     } catch (error) {
       console.log(error);
