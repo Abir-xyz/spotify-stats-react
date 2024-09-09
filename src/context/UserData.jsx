@@ -15,6 +15,7 @@ export const UserProvider = ({ children }) => {
   const [topArtistFourWeek, setTopArtistSix] = useState('');
   const [topTrackYear, setTopTrackYear] = useState('');
   const [topTrackFourWeek, setTopTrackSix] = useState('');
+  const [recentTracks, setRecentTracks] = useState('');
 
   const getUser = async () => {
     try {
@@ -133,12 +134,30 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const getRecentTracks = async () => {
+    try {
+      const response = await axios(
+        `${rootURL}/player/recently-played?limit=50`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.data;
+      setRecentTracks(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUser();
     getPlayList();
     getFollowing();
     getTopArtist();
     getTopTrack();
+    getRecentTracks();
   }, []);
 
   return (
@@ -153,6 +172,7 @@ export const UserProvider = ({ children }) => {
         topArtistFourWeek,
         topTrackFourWeek,
         topTrackYear,
+        recentTracks,
       }}
     >
       {children}

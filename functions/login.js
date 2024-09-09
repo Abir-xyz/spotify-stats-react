@@ -7,7 +7,7 @@ exports.handler = async function (event, context) {
   const redirect_uri = process.env.VITE_SPOTIFY_REDIRECT_URI;
 
   const scopes = encodeURIComponent(
-    'user-read-private user-read-email user-follow-read playlist-read-private user-top-read'
+    'user-read-private user-read-email user-follow-read playlist-read-private user-top-read user-read-recently-played'
   );
 
   const authUrl =
