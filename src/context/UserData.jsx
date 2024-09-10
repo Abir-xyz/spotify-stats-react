@@ -6,6 +6,7 @@ const rootURL = 'https://api.spotify.com/v1/me';
 const token = localStorage.getItem('spotify_access_token');
 
 export const UserProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState('');
   const [playList, setPlayList] = useState('');
   const [following, setFollowing] = useState('');
@@ -18,6 +19,7 @@ export const UserProvider = ({ children }) => {
   const [recentTracks, setRecentTracks] = useState('');
 
   const getUser = async () => {
+    setIsLoading(true);
     try {
       const response = await axios(`${rootURL}`, {
         headers: {
@@ -26,12 +28,14 @@ export const UserProvider = ({ children }) => {
       });
       const data = await response.data;
       setUser(data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const getPlayList = async () => {
+    setIsLoading(true);
     let allPlaylists = [];
     let url = `${rootURL}/playlists`;
 
@@ -47,12 +51,14 @@ export const UserProvider = ({ children }) => {
         url = data.next;
       }
       setPlayList(allPlaylists);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const getFollowing = async () => {
+    setIsLoading(true);
     try {
       const response = await axios(`${rootURL}/following?type=artist`, {
         headers: {
@@ -61,12 +67,14 @@ export const UserProvider = ({ children }) => {
       });
       const data = await response.data;
       setFollowing(data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const getTopArtist = async () => {
+    setIsLoading(true);
     try {
       const response = await axios(`${rootURL}/top/artists?limit=50`, {
         headers: {
@@ -95,12 +103,14 @@ export const UserProvider = ({ children }) => {
       setTopArtist(data);
       setTopArtistYear(yearData);
       setTopArtistSix(FourWeek);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const getTopTrack = async () => {
+    setIsLoading(true);
     try {
       const response = await axios(`${rootURL}/top/tracks?limit=50`, {
         headers: {
@@ -129,12 +139,14 @@ export const UserProvider = ({ children }) => {
       setTopTracks(data);
       setTopTrackYear(yearData);
       setTopTrackSix(FourWeek);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const getRecentTracks = async () => {
+    setIsLoading(true);
     try {
       const response = await axios(
         `${rootURL}/player/recently-played?limit=50`,
@@ -146,6 +158,7 @@ export const UserProvider = ({ children }) => {
       );
       const data = await response.data;
       setRecentTracks(data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -173,6 +186,8 @@ export const UserProvider = ({ children }) => {
         topTrackFourWeek,
         topTrackYear,
         recentTracks,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

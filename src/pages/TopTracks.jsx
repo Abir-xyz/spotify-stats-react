@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDataContext } from '../context/UserData';
+import Loading from '../components/Loading';
 
 const TopTracks = () => {
-  const { topTrackYear, topTrack, topTrackFourWeek } = useDataContext();
+  const { topTrackYear, topTrack, topTrackFourWeek, isLoading } =
+    useDataContext();
   const yearly = topTrackYear && topTrackYear.items;
 
   const [termValue, setTermValue] = useState(yearly);
@@ -137,8 +139,7 @@ const TopTracks = () => {
                 })
               ) : (
                 <div className='load'>
-                  {/* <p></p> */}
-                  Loading...
+                  <Loading />
                 </div>
               )}
             </div>

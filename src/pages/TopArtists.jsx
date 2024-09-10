@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDataContext } from '../context/UserData';
+import Loading from '../components/Loading';
 
 const TopArtists = () => {
   const { topArtistYear, topArtist, topArtistFourWeek } = useDataContext();
@@ -86,8 +87,7 @@ const TopArtists = () => {
                 })
               ) : (
                 <div className='load'>
-                  {/* <p></p> */}
-                  Loading...
+                  <Loading />
                 </div>
               )}
             </div>

@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import Login from './Login';
 import { Navbar, UserInfo, TopArtist, TopSongs } from '../components';
+import Home from './Home';
 
 const accessToken = localStorage.getItem('spotify_access_token');
 
 const Dashboard = () => {
   const [isToken, setIsToken] = useState('');
-
   useEffect(() => {
     setIsToken(accessToken);
   });
@@ -16,10 +16,7 @@ const Dashboard = () => {
     <Wrapper className='section'>
       {isToken ? (
         <div>
-          <Navbar />
-          <UserInfo />
-          <TopArtist />
-          <TopSongs />
+          <Home />
         </div>
       ) : (
         <div>

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { useDataContext } from '../context/UserData';
+import Loading from '../components/Loading';
 
 const Recents = () => {
   const { recentTracks } = useDataContext();
   const tracks = recentTracks && recentTracks.items;
-  console.log(tracks);
 
   return (
     <Wrapper className='section'>
@@ -60,7 +60,7 @@ const Recents = () => {
             </div>
           ) : (
             <div className='load'>
-              <p>Loading...</p>
+              <Loading />
             </div>
           )}
         </div>
@@ -122,11 +122,11 @@ const Wrapper = styled.section`
     justify-content: space-between;
   }
   .load {
-    height: 60vh;
-    width: 90vw;
     display: flex;
     align-items: center;
     justify-content: center;
+    max-height: 80vh;
+    width: 90vw;
   }
 
   .duration p {

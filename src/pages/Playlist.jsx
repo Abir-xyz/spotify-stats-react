@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useDataContext } from '../context/UserData';
+import Loading from '../components/Loading';
 
 const Playlist = () => {
   const { playList } = useDataContext();
-  console.log(playList);
 
   return (
     <Wrapper className='section'>
@@ -12,7 +12,7 @@ const Playlist = () => {
           <p>My Playlists</p>
         </div>
         <div className='content-wrapper'>
-          {playList &&
+          {playList ? (
             playList.map((item) => {
               return (
                 <div className='content' key={item.id}>
@@ -25,7 +25,12 @@ const Playlist = () => {
                   </div>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <div className='load'>
+              <Loading />
+            </div>
+          )}
         </div>
       </div>
     </Wrapper>
@@ -72,6 +77,13 @@ const Wrapper = styled.section`
   }
   .content {
     flex: 0 0 calc(50% - 10px);
+  }
+  .load {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 80vh;
+    width: 90vw;
   }
 `;
 
