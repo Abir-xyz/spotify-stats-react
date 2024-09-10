@@ -109,7 +109,11 @@ const Wrapper = styled.section`
     white-space: nowrap;
   }
   .track-info {
-    margin-right: 16px;
+    /* margin-right: 16px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    white-space: nowrap;
   }
   .inner-main {
     margin: 10px 0;
@@ -133,9 +137,14 @@ const Wrapper = styled.section`
     color: var(--greyTxt);
     font-size: 0.8rem;
   }
-
   .content {
     margin-bottom: 5rem;
+  }
+  @media screen and (max-width: 768px) {
+    .container {
+      max-width: 85vw;
+      margin: 0 auto;
+    }
   }
 `;
 

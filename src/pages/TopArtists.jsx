@@ -173,6 +173,17 @@ const Wrapper = styled.section`
       grid-column: span 1;
     }
   }
+  @media screen and (max-width: 600px) {
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+    .main {
+      grid-column: span 1;
+    }
+  }
 `;
 
 export default TopArtists;

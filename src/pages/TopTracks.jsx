@@ -13,8 +13,6 @@ const TopTracks = () => {
   const sixMonth = topTrack && topTrack.items;
   const FourWeek = topTrackFourWeek && topTrackFourWeek.items;
 
-  console.log(yearly);
-
   const handleActiveBtn = () => {
     const btns = document.querySelectorAll('.btn');
     btns.forEach((btn) => {
@@ -212,6 +210,13 @@ const Wrapper = styled.section`
     max-width: 300px;
     white-space: nowrap;
   }
+  .track-info {
+    /* margin-right: 16px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    white-space: nowrap;
+  }
   .inner-main {
     margin: 10px 0;
     display: flex;
@@ -240,15 +245,10 @@ const Wrapper = styled.section`
   }
 
   @media screen and (max-width: 768px) {
-    /* .content-wrapper {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      align-items: center;
+    .container {
+      max-width: 85vw;
+      margin: 0 auto;
     }
-    .main {
-      grid-column: span 1;
-    } */
   }
 `;
 
