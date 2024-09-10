@@ -55,6 +55,7 @@ const TopTracks = () => {
           </div>
         </div>
         <div className='content'>
+          {/*  */}
           {termValue ? (
             <div className='content-wrapper'>
               {termValue &&
@@ -142,6 +143,7 @@ const TopTracks = () => {
               )}
             </div>
           )}
+          {/*  */}
         </div>
       </div>
       ;
