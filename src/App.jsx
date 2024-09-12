@@ -8,6 +8,7 @@ import {
   TopTracks,
   Playlist,
   Recents,
+  PlaylistTracks,
 } from './pages';
 
 import { Footer } from './components';
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='top-tracks' element={<TopTracks />} />
           <Route path='playlists' element={<Playlist />} />
           <Route path='recent' element={<Recents />} />
+          <Route path='playlist-tracks' element={<PlaylistTracks />} />
           <Route path='*' element={<Error />} />
         </Routes>
         <Footer />

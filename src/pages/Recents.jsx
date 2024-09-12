@@ -25,7 +25,7 @@ const Recents = () => {
                     (item.track.duration_ms % 60000) / 1000
                   );
                   return (
-                    <div className='main' key={item.id}>
+                    <div className='main' key={item.track.id}>
                       <div className='main-wrap'>
                         <div className='inner-main'>
                           <div className='img-wrapper'>

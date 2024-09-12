@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 import { useDataContext } from '../context/UserData';
 import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
 
 const Playlist = () => {
-  const { playList } = useDataContext();
+  const { playList, setPlaylistId } = useDataContext();
+
+  const handlePlaylistId = (e) => {
+    const Id = e.currentTarget.id;
+    setPlaylistId(Id);
+    localStorage.setItem('playlistId', Id);
+  };
 
   return (
     <Wrapper className='section'>
@@ -15,14 +22,21 @@ const Playlist = () => {
           {playList ? (
             playList.map((item) => {
               return (
-                <div className='content' key={item.id}>
-                  <div className='img-wrapper'>
-                    <img src={item.images[0].url} alt='image' />
-                  </div>
-                  <div className='info-wrapper'>
-                    <p className='title'>{item.name}</p>
-                    <p className='length'>{item.tracks.total} Tracks</p>
-                  </div>
+                <div
+                  className='content'
+                  key={item.id}
+                  onClick={handlePlaylistId}
+                  id={item.id}
+                >
+                  <Link to='/playlist-tracks' className='link'>
+                    <div className='img-wrapper'>
+                      <img src={item.images[0].url} alt='image' />
+                    </div>
+                    <div className='info-wrapper'>
+                      <p className='title'>{item.name}</p>
+                      <p className='length'>{item.tracks.total} Tracks</p>
+                    </div>
+                  </Link>
                 </div>
               );
             })
@@ -41,6 +55,7 @@ const Wrapper = styled.section`
   .container {
     max-width: 90vw;
     margin: 0 auto;
+    margin-bottom: 5rem !important;
   }
   .heading {
     text-align: center;
@@ -84,6 +99,9 @@ const Wrapper = styled.section`
     justify-content: center;
     max-height: 80vh;
     width: 90vw;
+  }
+  .link {
+    text-decoration: none;
   }
 `;
 

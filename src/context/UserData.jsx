@@ -17,6 +17,13 @@ export const UserProvider = ({ children }) => {
   const [topTrackYear, setTopTrackYear] = useState('');
   const [topTrackFourWeek, setTopTrackSix] = useState('');
   const [recentTracks, setRecentTracks] = useState('');
+  // const [playlistID, setPlaylistId] = useState('');
+  const [playlistID, setPlaylistId] = useState(() => {
+    const savedId = localStorage.getItem('playlistId');
+    return savedId ? savedId : null;
+  });
+  const [playlistTracks, setPlaylistTracks] = useState('');
+  const [currentAlbum, setCurrentAlbum] = useState('');
 
   const getUser = async () => {
     setIsLoading(true);
@@ -26,7 +33,7 @@ export const UserProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = await response.data;
+      const data = response.data;
       setUser(data);
       setIsLoading(false);
     } catch (error) {
@@ -46,7 +53,7 @@ export const UserProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        const data = await response.data;
+        const data = response.data;
         allPlaylists = allPlaylists.concat(data.items);
         url = data.next;
       }
@@ -65,7 +72,7 @@ export const UserProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = await response.data;
+      const data = response.data;
       setFollowing(data);
       setIsLoading(false);
     } catch (error) {
@@ -97,9 +104,9 @@ export const UserProvider = ({ children }) => {
           },
         }
       );
-      const data = await response.data;
-      const yearData = await byYear.data;
-      const FourWeek = await byFourWeek.data;
+      const data = response.data;
+      const yearData = byYear.data;
+      const FourWeek = byFourWeek.data;
       setTopArtist(data);
       setTopArtistYear(yearData);
       setTopArtistSix(FourWeek);
@@ -133,9 +140,9 @@ export const UserProvider = ({ children }) => {
           },
         }
       );
-      const data = await response.data;
-      const yearData = await byYear.data;
-      const FourWeek = await byFourWeek.data;
+      const data = response.data;
+      const yearData = byYear.data;
+      const FourWeek = byFourWeek.data;
       setTopTracks(data);
       setTopTrackYear(yearData);
       setTopTrackSix(FourWeek);
@@ -156,13 +163,62 @@ export const UserProvider = ({ children }) => {
           },
         }
       );
-      const data = await response.data;
+      const data = response.data;
       setRecentTracks(data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getPlaylistTracks = async () => {
+    setIsLoading(true);
+    let playlistTracks = [];
+    let playlistUrl = `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=0&limit=50`;
+
+    try {
+      while (playlistUrl) {
+        const response = await axios(playlistUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = response.data;
+        playlistTracks = playlistTracks.concat(data.items);
+        playlistUrl = data.next;
+      }
+      setPlaylistTracks(playlistTracks);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCurrentAlbum = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios(
+        `https://open.spotify.com/playlist/${playlistID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = response.data;
+      setCurrentAlbum(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (playlistID) {
+      getPlaylistTracks();
+      getCurrentAlbum();
+    }
+  }, [playlistID]);
 
   useEffect(() => {
     getUser();
@@ -188,6 +244,10 @@ export const UserProvider = ({ children }) => {
         recentTracks,
         isLoading,
         setIsLoading,
+        playlistID,
+        setPlaylistId,
+        playlistTracks,
+        currentAlbum,
       }}
     >
       {children}
