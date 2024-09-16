@@ -5,6 +5,16 @@ import Loading from '../components/Loading';
 const Recents = () => {
   const { recentTracks, isLoading } = useDataContext();
   const tracks = recentTracks && recentTracks.items;
+  const uniqueTracks = [];
+  const tracksIds = new Set();
+
+  tracks &&
+    tracks.forEach((item) => {
+      if (!tracksIds.has(item.track.id)) {
+        tracksIds.add(item.track.id);
+        uniqueTracks.push(item);
+      }
+    });
 
   if (isLoading) {
     return <Loading />;
@@ -20,7 +30,7 @@ const Recents = () => {
           {tracks ? (
             <div className='content-wrapper'>
               {tracks &&
-                tracks.map((item) => {
+                uniqueTracks.map((item) => {
                   const artists = item.track.artists;
                   const durationInMin = Math.floor(
                     item.track.duration_ms / 60000
