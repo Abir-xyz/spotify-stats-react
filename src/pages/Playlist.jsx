@@ -109,6 +109,12 @@ const Wrapper = styled.section`
     text-decoration: none;
   }
 
+  @media screen and (min-width: 1400px) {
+    .content {
+      flex: 0 0 calc(33.33% - 10px);
+    }
+  }
+
   @media screen and (min-width: 992px) {
     .container {
       max-width: 40vw;
