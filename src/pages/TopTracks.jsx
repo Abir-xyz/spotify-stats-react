@@ -213,14 +213,14 @@ const Wrapper = styled.section`
     color: var(--darkTxt);
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 300px;
+    max-width: 250px;
     white-space: nowrap;
   }
   .track-info {
     /* margin-right: 16px; */
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 300px;
+    max-width: 250px;
     white-space: nowrap;
   }
   .inner-main {
