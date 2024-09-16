@@ -3,7 +3,10 @@ import { useDataContext } from '../context/UserData';
 import Loading from '../components/Loading';
 
 const PlaylistTracks = () => {
-  const { playlistTracks, currentAlbum, isLoading } = useDataContext();
+  const { playlistTracks, currentAlbum, isLoading, playlistID } =
+    useDataContext();
+
+  currentAlbum && console.log(currentAlbum);
 
   if (isLoading) {
     return <Loading />;
@@ -13,8 +16,40 @@ const PlaylistTracks = () => {
     <Wrapper className='section'>
       <div className='container'>
         <div className='heading'>
-          <img src={``} alt='album-img' />
-          <p></p>
+          {currentAlbum && (
+            <>
+              <div className='album-info'>
+                <img src={currentAlbum.images[0].url} alt='album-img' />
+                <p className='album-title'>{currentAlbum.name}</p>
+                <p className='album-owner'>
+                  by{' '}
+                  <span className='albumBy'>
+                    {currentAlbum.owner.display_name}
+                  </span>{' '}
+                </p>
+              </div>
+              <div className='album-counts'>
+                <div>
+                  <p className='album-tracks'>
+                    Tracks : {currentAlbum.tracks.items.length}
+                  </p>
+                  <p className='followers'>
+                    Followers : {currentAlbum.followers.total}
+                  </p>
+                </div>
+                <div className='open'>
+                  <a
+                    href={`https://open.spotify.com/playlist/${playlistID}`}
+                    target='_0'
+                  >
+                    <span>
+                      <i class='fa-regular fa-circle-play'></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </>
+          )}
         </div>
         <div className='contents'>
           {playlistTracks ? (
@@ -71,12 +106,48 @@ const Wrapper = styled.section`
     margin: 0 auto;
     margin-bottom: 5rem !important;
   }
+
   .heading {
     text-align: center;
     margin: 3rem 0;
     p {
       font-size: 1.5rem;
       font-weight: 600;
+    }
+  }
+
+  .album-info {
+    img {
+      height: 170px;
+      box-shadow: rgba(255, 255, 255, 0.15) 0px 48px 100px 0px;
+    }
+    .album-title {
+      font-size: 1rem;
+      padding: 5px 0;
+    }
+    .album-owner {
+      font-size: 0.8rem;
+      color: var(--greyTxt);
+    }
+  }
+  .album-counts {
+    text-align: left;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      font-size: 0.9rem;
+      padding: 3px 0;
+      color: var(--greyTxt);
+    }
+    a span {
+      font-size: 2.6rem;
+      color: var(--themeClr);
+      transition: var(--btnTransition);
+    }
+    a span:hover {
+      color: #35ff35;
     }
   }
 
