@@ -213,14 +213,14 @@ const Wrapper = styled.section`
     color: var(--darkTxt);
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 250px;
+    max-width: 300px;
     white-space: nowrap;
   }
   .track-info {
     /* margin-right: 16px; */
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 250px;
+    max-width: 300px;
     white-space: nowrap;
   }
   .inner-main {
@@ -256,6 +256,23 @@ const Wrapper = styled.section`
       margin: 0 auto;
     }
   }
+
+@media screen and (max-width: 600px) {
+.track-title {
+   
+    max-width: 240px;
+    
+  }
+  .track-info {
+    
+    
+    max-width: 240px;
+    
+  }
+
+    
+  }
+
 
   @media screen and (min-width: 992px) {
     max-width: 40vw;
