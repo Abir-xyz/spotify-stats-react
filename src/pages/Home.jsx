@@ -10,7 +10,7 @@ const Home = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div>
+        <div className='wrapper'>
           <Navbar />
           <UserInfo />
           <TopArtist />
@@ -21,6 +21,13 @@ const Home = () => {
   );
 };
 
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  @media screen and (min-width: 992px) {
+    max-width: 40vw;
+    margin: 0 auto;
+    border: 1px solid #ffffff21;
+    padding: 0 16px;
+  }
+`;
 
 export default Home;

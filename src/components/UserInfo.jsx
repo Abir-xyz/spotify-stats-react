@@ -73,6 +73,9 @@ const Wrapper = styled.section`
       font-weight: 400;
     }
   }
+
+  @media screen and (min-width: 768px) {
+  }
 `;
 
 export default UserInfo;

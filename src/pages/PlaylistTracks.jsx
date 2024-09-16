@@ -215,6 +215,13 @@ const Wrapper = styled.section`
       margin: 0 auto;
     }
   }
+
+  @media screen and (min-width: 992px) {
+    max-width: 40vw;
+    margin: 0 auto;
+    border: 1px solid #ffffff21;
+    padding: 0 16px;
+  }
 `;
 
 export default PlaylistTracks;

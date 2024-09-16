@@ -143,7 +143,7 @@ const TopTracks = () => {
                 })
               ) : (
                 <div className='load'>
-                  <Loading />
+                  <p>Loading...</p>
                 </div>
               )}
             </div>
@@ -254,6 +254,20 @@ const Wrapper = styled.section`
     .container {
       max-width: 85vw;
       margin: 0 auto;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    max-width: 40vw;
+    margin: 0 auto;
+    border: 1px solid #ffffff21;
+    padding: 0 16px;
+    .load {
+      height: 60vh;
+      width: 40vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;

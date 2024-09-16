@@ -46,7 +46,7 @@ const Playlist = () => {
             })
           ) : (
             <div className='load'>
-              <Loading />
+              <p>Loading...</p>
             </div>
           )}
         </div>
@@ -107,6 +107,22 @@ const Wrapper = styled.section`
   }
   .link {
     text-decoration: none;
+  }
+
+  @media screen and (min-width: 992px) {
+    .container {
+      max-width: 40vw;
+      margin: 0 auto;
+      border: 1px solid #ffffff21;
+      padding: 0 16px;
+    }
+    .load {
+      height: 60vh;
+      width: 40vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 `;
 

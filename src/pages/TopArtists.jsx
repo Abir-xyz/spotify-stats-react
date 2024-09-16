@@ -92,7 +92,7 @@ const TopArtists = () => {
                 })
               ) : (
                 <div className='load'>
-                  <Loading />
+                  <p>Loading...</p>
                 </div>
               )}
             </div>
@@ -187,6 +187,46 @@ const Wrapper = styled.section`
     }
     .main {
       grid-column: span 1;
+    }
+  }
+
+  @media screen and (min-width: 728px) {
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+    .main {
+      grid-column: span 1;
+    }
+  }
+
+  @media screen and (min-width: 1160px) {
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+    .main {
+      grid-column: span 1;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    .container {
+      max-width: 40vw;
+      margin: 0 auto;
+      border: 1px solid #ffffff21;
+      padding: 0 16px;
+    }
+    .load {
+      height: 60vh;
+      width: 40vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;

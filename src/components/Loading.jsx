@@ -18,9 +18,17 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: center;
   }
-  img{
+  img {
     height: 100px;
     width: 100px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .container {
+      max-width: 40vw;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
   }
 `;
 
