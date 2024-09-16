@@ -37,6 +37,10 @@ const TopTracks = () => {
     handleActiveBtn();
   }, []);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Wrapper className='section'>
       <div className='container'>
@@ -100,6 +104,8 @@ const TopTracks = () => {
             <div className='content-wrapper'>
               {yearly ? (
                 yearly.map((item) => {
+                  console.log(item);
+
                   const artists = item.album.artists;
                   const durationInMin = Math.floor(item.duration_ms / 60000);
                   const remainingSec = Math.floor(
@@ -110,7 +116,7 @@ const TopTracks = () => {
                       <div className='main-wrap'>
                         <div className='inner-main'>
                           <div className='img-wrapper'>
-                            <img src={item.album.images[0].url} alt='image' />
+                            <img src={item.album.images[2].url} alt='image' />
                           </div>
                           <div className='info-wrapper'>
                             <p className='track-title'>{item.name}</p>
@@ -188,7 +194,7 @@ const Wrapper = styled.section`
   }
   .img-wrapper img {
     height: 70px;
-    width: 70;
+    /* width: 70; */
     margin-bottom: 10px;
   }
   .info-wrapper {

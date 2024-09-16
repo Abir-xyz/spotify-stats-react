@@ -194,29 +194,29 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const getCurrentAlbum = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios(
-        `https://open.spotify.com/playlist/${playlistID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = response.data;
-      setCurrentAlbum(data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getCurrentAlbum = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await axios(
+  //       `https://open.spotify.com/playlist/${playlistID}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     const data = response.data;
+  //     setCurrentAlbum(data);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     if (playlistID) {
       getPlaylistTracks();
-      getCurrentAlbum();
+      // getCurrentAlbum();
     }
   }, [playlistID]);
 

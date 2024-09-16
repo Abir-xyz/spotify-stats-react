@@ -4,7 +4,8 @@ import { useDataContext } from '../context/UserData';
 import Loading from '../components/Loading';
 
 const TopArtists = () => {
-  const { topArtistYear, topArtist, topArtistFourWeek } = useDataContext();
+  const { topArtistYear, topArtist, topArtistFourWeek, isLoading } =
+    useDataContext();
   const yearly = topArtistYear && topArtistYear.items;
 
   const [termValue, setTermValue] = useState(yearly);
@@ -36,6 +37,10 @@ const TopArtists = () => {
     handleActiveBtn();
   }, []);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Wrapper className='section'>
       <div className='container'>
@@ -61,7 +66,7 @@ const TopArtists = () => {
                   return (
                     <div className='main' key={item.id}>
                       <img
-                        src={item.images[0].url}
+                        src={item.images[2].url}
                         alt='image'
                         className='item-img'
                       />

@@ -4,13 +4,17 @@ import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
 
 const Playlist = () => {
-  const { playList, setPlaylistId } = useDataContext();
+  const { playList, setPlaylistId, handleClick, isLoading } = useDataContext();
 
   const handlePlaylistId = (e) => {
     const Id = e.currentTarget.id;
     setPlaylistId(Id);
     localStorage.setItem('playlistId', Id);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper className='section'>
@@ -66,8 +70,9 @@ const Wrapper = styled.section`
     }
   }
   .img-wrapper img {
-    width: 150px;
-    height: auto;
+    /* width: 150px;
+    height: auto; */
+    height: 150px;
   }
   .title {
     font-size: 1.1rem;

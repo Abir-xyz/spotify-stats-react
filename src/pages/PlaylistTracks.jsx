@@ -3,7 +3,11 @@ import { useDataContext } from '../context/UserData';
 import Loading from '../components/Loading';
 
 const PlaylistTracks = () => {
-  const { playlistTracks, currentAlbum } = useDataContext();
+  const { playlistTracks, currentAlbum, isLoading } = useDataContext();
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper className='section'>
@@ -25,7 +29,7 @@ const PlaylistTracks = () => {
                   <div className='main-wrap'>
                     <div className='inner-main'>
                       <div className='img-wrapper'>
-                        <img src={item.track.album.images[0].url} alt='image' />
+                        <img src={item.track.album.images[2].url} alt='image' />
                       </div>
                       <div className='info-wrapper'>
                         <p className='track-title'>{item.track.name}</p>

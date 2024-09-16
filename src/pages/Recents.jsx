@@ -3,8 +3,12 @@ import { useDataContext } from '../context/UserData';
 import Loading from '../components/Loading';
 
 const Recents = () => {
-  const { recentTracks } = useDataContext();
+  const { recentTracks, isLoading } = useDataContext();
   const tracks = recentTracks && recentTracks.items;
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper className='section'>
@@ -30,7 +34,7 @@ const Recents = () => {
                         <div className='inner-main'>
                           <div className='img-wrapper'>
                             <img
-                              src={item.track.album.images[0].url}
+                              src={item.track.album.images[2].url}
                               alt='image'
                             />
                           </div>
