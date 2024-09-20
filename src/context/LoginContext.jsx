@@ -42,6 +42,37 @@ export const LoginProvider = ({ children }) => {
       });
   }
 
+  // refresh the token
+  async function refreshToken() {
+    const refreshToken = localStorage.getItem('spotify_refresh_token');
+    if (!refreshToken) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/.netlify/functions/refresh-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ refreshToken }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to refresh token');
+      }
+
+      const data = await response.json();
+      localStorage.setItem('access_token', data.access_token);
+
+      // Set another timer to refresh the token before it expires again
+      setTimeout(refreshToken, (data.expires_in - 300) * 1000);
+    } catch (error) {
+      console.error('Error refreshing token:', error);
+      // Handle token refresh failure (force user to log in again)
+    }
+  }
+
   // logout
   const handleLogout = () => {
     localStorage.removeItem('spotify_access_token');
@@ -49,6 +80,10 @@ export const LoginProvider = ({ children }) => {
     localStorage.removeItem('spotify_refresh_token');
     window.location.href = '/';
   };
+
+  useEffect(() => {
+    refreshToken();
+  }, []);
 
   return (
     <LoginContext.Provider
