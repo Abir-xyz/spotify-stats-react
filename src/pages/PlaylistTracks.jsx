@@ -216,6 +216,23 @@ const Wrapper = styled.section`
     }
   }
 
+@media screen and (max-width: 600px) {
+.track-title {
+   
+    max-width: 240px;
+    
+  }
+  .track-info {
+    
+    
+    max-width: 240px;
+    
+  }
+
+    
+  }
+
+
   @media screen and (min-width: 992px) {
     max-width: 40vw;
     margin: 0 auto;
