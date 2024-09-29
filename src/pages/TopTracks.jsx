@@ -104,8 +104,6 @@ const TopTracks = () => {
             <div className='content-wrapper'>
               {yearly ? (
                 yearly.map((item) => {
-                  console.log(item);
-
                   const artists = item.album.artists;
                   const durationInMin = Math.floor(item.duration_ms / 60000);
                   const remainingSec = Math.floor(
@@ -257,22 +255,14 @@ const Wrapper = styled.section`
     }
   }
 
-@media screen and (max-width: 600px) {
-.track-title {
-   
-    max-width: 240px;
-    
+  @media screen and (max-width: 600px) {
+    .track-title {
+      max-width: 240px;
+    }
+    .track-info {
+      max-width: 240px;
+    }
   }
-  .track-info {
-    
-    
-    max-width: 240px;
-    
-  }
-
-    
-  }
-
 
   @media screen and (min-width: 992px) {
     max-width: 40vw;

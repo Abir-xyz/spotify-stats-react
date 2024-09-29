@@ -6,8 +6,6 @@ const PlaylistTracks = () => {
   const { playlistTracks, currentAlbum, isLoading, playlistID } =
     useDataContext();
 
-  currentAlbum && console.log(currentAlbum);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -43,7 +41,7 @@ const PlaylistTracks = () => {
                     target='_0'
                   >
                     <span>
-                      <i class='fa-regular fa-circle-play'></i>
+                      <i className='fa-regular fa-circle-play'></i>
                     </span>
                   </a>
                 </div>
@@ -216,22 +214,14 @@ const Wrapper = styled.section`
     }
   }
 
-@media screen and (max-width: 600px) {
-.track-title {
-   
-    max-width: 240px;
-    
+  @media screen and (max-width: 600px) {
+    .track-title {
+      max-width: 240px;
+    }
+    .track-info {
+      max-width: 240px;
+    }
   }
-  .track-info {
-    
-    
-    max-width: 240px;
-    
-  }
-
-    
-  }
-
 
   @media screen and (min-width: 992px) {
     max-width: 40vw;
