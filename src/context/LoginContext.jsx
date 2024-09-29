@@ -5,6 +5,7 @@ const LoginContext = createContext();
 
 export const LoginProvider = ({ children }) => {
   const accessToken = localStorage.getItem('spotify_access_token');
+  const refreshToken = localStorage.getItem('spotify_refresh_token');
 
   // exchange authorization code with token
   const exchangeCodeForToken = async (code) => {
@@ -43,35 +44,29 @@ export const LoginProvider = ({ children }) => {
   }
 
   // refresh the token
-  async function refreshToken() {
-    const refreshToken = localStorage.getItem('spotify_refresh_token');
-    if (!refreshToken) {
-      return;
-    }
 
+  const refreshAccessToken = async (refreshToken) => {
     try {
-      const response = await fetch('/.netlify/functions/refresh-token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ refreshToken }),
+      const response = await axios.get('/.netlify/functions/refresh-token', {
+        params: { refresh_token: refreshToken },
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to refresh token');
+      const { access_token, refresh_token: newRefreshToken } = response.data;
+      // Store the new tokens as needed
+      localStorage.setItem('spotify_access_token', access_token);
+      if (newRefreshToken) {
+        localStorage.setItem('spotify_refresh_token', newRefreshToken);
       }
-
-      const data = await response.json();
-      localStorage.setItem('access_token', data.access_token);
-
-      // Set another timer to refresh the token before it expires again
-      setTimeout(refreshToken, (data.expires_in - 300) * 1000);
     } catch (error) {
-      console.error('Error refreshing token:', error);
-      // Handle token refresh failure (force user to log in again)
+      console.error(
+        'Error refreshing access token:',
+        error.response?.data?.error
+      );
     }
-  }
+  };
+
+  useEffect(() => {
+    refreshAccessToken(refreshToken);
+  }, []);
 
   // logout
   const handleLogout = () => {
@@ -80,10 +75,6 @@ export const LoginProvider = ({ children }) => {
     localStorage.removeItem('spotify_refresh_token');
     window.location.href = '/';
   };
-
-  useEffect(() => {
-    refreshToken();
-  }, []);
 
   return (
     <LoginContext.Provider
