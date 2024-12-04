@@ -23,7 +23,7 @@ const TopArtist = () => {
               return (
                 <div className='item' key={item.id}>
                   <div className='img-wrapper'>
-                    <img src={item.images[0].url} alt='artist-img' />
+                    <img src={item.images[2].url} alt='artist-img' />
                   </div>
                   <div className='title'>
                     <p>{item.name}</p>

@@ -82,7 +82,7 @@ const TopArtists = () => {
                   return (
                     <div className='main' key={item.id}>
                       <img
-                        src={item.images[0].url}
+                        src={item.images[2].url}
                         alt='image'
                         className='item-img'
                       />

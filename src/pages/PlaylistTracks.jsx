@@ -29,7 +29,7 @@ const PlaylistTracks = () => {
               <div className='album-counts'>
                 <div>
                   <p className='album-tracks'>
-                    Tracks : {currentAlbum.tracks.items.length}
+                    Tracks : {playlistTracks.length}
                   </p>
                   <p className='followers'>
                     Followers : {currentAlbum.followers.total}
@@ -57,12 +57,16 @@ const PlaylistTracks = () => {
               const remainingSec = Math.floor(
                 (item.track.duration_ms % 60000) / 1000
               );
+
               return (
                 <div className='main' key={item.track.id}>
                   <div className='main-wrap'>
                     <div className='inner-main'>
                       <div className='img-wrapper'>
-                        <img src={item.track.album.images[2].url} alt='image' />
+                        <img
+                          src={`${item.track.album.images[2].url}`}
+                          alt='image'
+                        />
                       </div>
                       <div className='info-wrapper'>
                         <p className='track-title'>{item.track.name}</p>
@@ -89,7 +93,7 @@ const PlaylistTracks = () => {
             })
           ) : (
             <div className='load'>
-              <Loading />
+              <p>loading</p>
             </div>
           )}
         </div>
@@ -192,7 +196,7 @@ const Wrapper = styled.section`
   }
   .load {
     height: 60vh;
-    width: 90vw;
+    /* width: 90vw; */
     display: flex;
     align-items: center;
     justify-content: center;

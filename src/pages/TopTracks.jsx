@@ -74,7 +74,7 @@ const TopTracks = () => {
                       <div className='main-wrap'>
                         <div className='inner-main'>
                           <div className='img-wrapper'>
-                            <img src={item.album.images[0].url} alt='image' />
+                            <img src={item.album.images[2].url} alt='image' />
                           </div>
                           <div className='info-wrapper'>
                             <p className='track-title'>{item.name}</p>

@@ -55,8 +55,12 @@ export const UserProvider = ({ children }) => {
         });
         const data = response.data;
         allPlaylists = allPlaylists.concat(data.items);
+        // Filter out null entries
+        // const validItems = data.items.filter((item) => item !== null);
+        // allPlaylists = allPlaylists.concat(validItems);
         url = data.next;
       }
+
       setPlayList(allPlaylists);
       setIsLoading(false);
     } catch (error) {

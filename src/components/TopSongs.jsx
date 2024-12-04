@@ -7,19 +7,19 @@ const TopSongs = () => {
   const { topTrack } = useDataContext();
   const allTracks = topTrack && topTrack.items;
   const tracks = allTracks && allTracks.slice(0, 10);
-  const audioRefs = useRef([]);
-  const [isPlaying, setIsPlaying] = useState({});
+  // const audioRefs = useRef([]);
+  // const [isPlaying, setIsPlaying] = useState({});
 
-  const handlePlayPause = (index) => {
-    const audioElement = audioRefs.current[index];
-    if (audioElement.paused) {
-      audioElement.play();
-      setIsPlaying((prevState) => ({ ...prevState, [index]: true }));
-    } else {
-      audioElement.pause();
-      setIsPlaying((prevState) => ({ ...prevState, [index]: false }));
-    }
-  };
+  // const handlePlayPause = (index) => {
+  //   const audioElement = audioRefs.current[index];
+  //   if (audioElement.paused) {
+  //     audioElement.play();
+  //     setIsPlaying((prevState) => ({ ...prevState, [index]: true }));
+  //   } else {
+  //     audioElement.pause();
+  //     setIsPlaying((prevState) => ({ ...prevState, [index]: false }));
+  //   }
+  // };
 
   return (
     <Wrapper className='section'>
@@ -36,10 +36,10 @@ const TopSongs = () => {
               return (
                 <div className='item' key={item.id}>
                   <div className='img-wrapper'>
-                    <img src={item.album.images[0].url} alt='track-img' />
+                    <img src={item.album.images[2].url} alt='track-img' />
                   </div>
-                  <div className='track-audio'>
-                    {/* Assigning a unique ref to each audio element */}
+                  {/* Assigning a unique ref to each audio element */}
+                  {/* <div className='track-audio'>
                     <audio
                       ref={(el) => (audioRefs.current[item.id] = el)}
                       className='audio'
@@ -60,7 +60,7 @@ const TopSongs = () => {
                         </span>
                       )}
                     </button>
-                  </div>
+                  </div> */}
                   <div className='title'>
                     <p className='name'>{item.name}</p>
                     <p className='track-info'>
@@ -100,8 +100,6 @@ const Wrapper = styled.section`
     height: 50px;
     border-radius: 2px;
     margin-right: 20px;
-    opacity: 0.8;
-    cursor: pointer;
   }
 
   .track-artist {

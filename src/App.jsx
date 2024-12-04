@@ -9,6 +9,7 @@ import {
   Playlist,
   Recents,
   PlaylistTracks,
+  Notice,
 } from './pages';
 
 import { Footer } from './components';
@@ -21,7 +22,8 @@ const App = () => {
           <Route path='/' element={<Dashboard />} />
           <Route path='top-artists' element={<TopArtists />} />
           <Route path='top-tracks' element={<TopTracks />} />
-          <Route path='playlists' element={<Playlist />} />
+          {/* <Route path='playlists' element={<Playlist />} /> */}
+          <Route path='playlists' element={<Notice />} />
           <Route path='recent' element={<Recents />} />
           <Route path='playlist-tracks' element={<PlaylistTracks />} />
           <Route path='*' element={<Error />} />

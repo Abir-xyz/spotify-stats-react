@@ -6,6 +6,7 @@ import PlaylistTracks from './PlaylistTracks';
 import Recents from './Recents';
 import TopArtists from './TopArtists';
 import TopTracks from './TopTracks';
+import Notice from './Notice';
 
 export {
   Dashboard,
@@ -16,4 +17,5 @@ export {
   Playlist,
   Recents,
   PlaylistTracks,
+  Notice,
 };
